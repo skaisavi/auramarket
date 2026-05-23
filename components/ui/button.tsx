@@ -6,7 +6,12 @@ type ButtonProps = {
   href?: string;
   variant?: "primary" | "secondary" | "ghost";
   className?: string;
-} & React.ButtonHTMLAttributes<HTMLButtonElement>;
+  onClick?: () => void;
+  disabled?: boolean;
+  type?: "button" | "submit" | "reset";
+  form?: string;
+  "aria-label"?: string;
+};
 
 const variants = {
   primary: "bg-ink text-white shadow-soft hover:bg-sage-700",
@@ -19,7 +24,11 @@ export function Button({
   href,
   variant = "primary",
   className,
-  ...props
+  onClick,
+  disabled,
+  type,
+  form,
+  "aria-label": ariaLabel,
 }: ButtonProps) {
   const classes = cn(
     "inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-5 text-sm font-semibold transition",
@@ -29,14 +38,14 @@ export function Button({
 
   if (href) {
     return (
-      <Link href={href} className={classes} onClick={props.onClick as React.MouseEventHandler<HTMLAnchorElement>}>
+      <Link href={href} className={classes} onClick={onClick} aria-label={ariaLabel}>
         {children}
       </Link>
     );
   }
 
   return (
-    <button className={classes} {...props}>
+    <button className={classes} onClick={onClick} disabled={disabled} type={type} form={form} aria-label={ariaLabel}>
       {children}
     </button>
   );
