@@ -1,0 +1,112 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  slug            String   @id
+  name            String
+  category        String
+  collection      String
+  price           Float
+  rating          Float
+  stock           Int
+  market          String
+  badge           String
+  tone            String
+  description     String
+  ritual          String[]
+  ingredients     String[]
+  image           String
+  status          String
+  seoCompleteness Int
+  imageAlt        String
+  sku             String
+  updatedAt       String
+  createdAt       DateTime @default(now())
+}
+
+model Campaign {
+  slug                String   @id
+  title               String
+  status              String
+  market              String
+  readiness           Int
+  launchDate          String
+  heroCopy            String
+  focusProducts       String[]
+  missingRequirements String[]
+  createdAt           DateTime @default(now())
+}
+
+model Banner {
+  id          String   @id
+  placement   String
+  message     String
+  status      String
+  market      String
+  startsAt    String
+  endsAt      String
+  destination String
+  imageAlt    String
+  visual      String
+  createdAt   DateTime @default(now())
+}
+
+model AuditIssue {
+  id        String   @id
+  area      String
+  issue     String
+  priority  String
+  status    String
+  owner     String
+  due       String
+  createdAt DateTime @default(now())
+}
+
+model Order {
+  id        String      @id @default(cuid())
+  orderRef  String      @unique
+  email     String
+  firstName String
+  lastName  String
+  address   String
+  city      String
+  postcode  String
+  country   String
+  total     Float
+  status    String      @default("Preparing")
+  items     OrderItem[]
+  createdAt DateTime    @default(now())
+}
+
+model OrderItem {
+  id          String @id @default(cuid())
+  orderId     String
+  order       Order  @relation(fields: [orderId], references: [id])
+  productSlug String
+  productName String
+  price       Float
+  quantity    Int
+}
+
+model Review {
+  id          String   @id @default(cuid())
+  productSlug String
+  name        String
+  rating      Int
+  body        String
+  verified    Boolean  @default(false)
+  helpful     Int      @default(0)
+  createdAt   DateTime @default(now())
+}
+
+model NewsletterSignup {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+}

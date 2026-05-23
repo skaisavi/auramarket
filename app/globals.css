@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --canvas: 42 35% 97%;
+  --surface: 39 36% 99%;
+  --surface-strong: 33 36% 94%;
+  --ink: 98 16% 14%;
+  --muted: 89 8% 43%;
+  --line: 34 22% 86%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(175, 201, 167, 0.24), transparent 34rem),
+    linear-gradient(180deg, hsl(var(--canvas)) 0%, #f4efe8 100%);
+  color: hsl(var(--ink));
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+::selection {
+  background: rgba(111, 147, 103, 0.24);
+}
+
+:focus-visible {
+  outline: 3px solid rgba(111, 147, 103, 0.44);
+  outline-offset: 3px;
+}
+
+.glass-panel {
+  border: 1px solid rgba(255, 255, 255, 0.62);
+  background: rgba(255, 255, 255, 0.68);
+  box-shadow: 0 24px 80px rgba(67, 72, 62, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(18px);
+}
+
+.admin-shell {
+  background:
+    linear-gradient(120deg, rgba(243, 247, 241, 0.84), rgba(251, 250, 247, 0.96)),
+    linear-gradient(180deg, #fbfaf7 0%, #f1eee7 100%);
+}
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(0.5rem) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.animate-toast-in {
+  animation: toast-in 0.18s ease-out;
+}
+
+@keyframes drawer-in {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
+}
+.animate-drawer-in {
+  animation: drawer-in 0.22s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.animate-fade-in {
+  animation: fade-in 0.18s ease-out;
+}
