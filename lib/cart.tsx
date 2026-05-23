@@ -195,7 +195,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
                   <span className="font-semibold">{formatCurrency(total)}</span>
                 </div>
                 <p className="mb-4 text-xs text-muted">Shipping and taxes calculated at checkout.</p>
-                <Button className="w-full">Proceed to checkout</Button>
+                <Button href="/checkout" className="w-full" onClick={() => setDrawerOpen(false)}>Proceed to checkout</Button>
                 <Button
                   variant="secondary"
                   className="mt-3 w-full"
